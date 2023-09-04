@@ -1,0 +1,77 @@
+:root {
+    --board-color: #f0e8f5;
+    --board-accent: #881be3;
+    --empty-color: #d0a3f1;
+    --number-color: #881be3;
+    --mine-color: #f349c4;
+    --mine-background: #f6b1e3;
+}
+
+.board {
+    background-color: var(--board-color);
+    border: 3px solid var(--board-accent);
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.board .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    cursor: default;
+}
+
+.board .flags, .board .timer, .board .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.board .flags, .board .timer {
+    border: 2px solid var(--mine-color);
+    background-color: var(--mine-background);
+    padding: 5px;
+    min-width: 30px;
+}
+
+.board .icon {
+    height: 40px;
+    width: 40px;
+    user-select: none;
+}
+
+.board .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board .tile {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--board-accent);
+    cursor: pointer;
+}
+
+.board .empty {
+    background-color: var(--empty-color);
+}
+
+.board .number {
+    background-color: var(--number-color);
+}
+
+.board .mine {
+    border: 2px solid var(--mine-color);
+    background-color: var(--mine-background);
+}
+
+.board .flagged {
+    color: var(--mine-color);
+}
