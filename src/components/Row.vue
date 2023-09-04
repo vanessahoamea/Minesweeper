@@ -5,13 +5,15 @@
         number: !tile.hidden && tile.value > 0, 
         mine: !tile.hidden && tile.isMine 
     }" @click.left="handleLeftClick(tile)" @click.right="handleRightClick($event, tile)">
-        <span v-if="!tile.hidden">
-            <font-awesome-icon :icon="['fas', 'bomb']" v-if="tile.isMine" />
+        <!-- opened tile -->
+        <div v-if="!tile.hidden">
+            <font-awesome-icon v-if="tile.isMine" :icon="['fas', 'bomb']" />
             <span v-if="tile.value > 0">{{ tile.value }}</span>
-        </span>
-        <span v-if="tile.hidden && tile.flagged">
+        </div>
+        <!-- flagged tile -->
+        <div v-if="tile.hidden && tile.flagged">
             <font-awesome-icon :icon="['fas', 'flag']" class="flagged" />
-        </span>
+        </div>
     </div>
 </template>
 

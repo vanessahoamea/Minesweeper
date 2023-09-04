@@ -1,5 +1,5 @@
 <template>
-    <div class="board">
+    <div :class="{ board: true, 'game-over': gameOver }">
         <Header :flags="flags" :icon="icon" :seconds="seconds" />
 
         <div v-for="(row, i) in board" :key="i" class="row">
@@ -13,14 +13,15 @@ import Row from "./Row.vue";
 import Header from "./Header.vue";
 
 export default {
-    props: ["boardSize", "mines", "minePositions", "createBoard"],
+    props: ["boardSize", "mines", "minePositions", "createBoard", "gameOver"],
     components: { Row, Header },
     data() {
         return {
             flags: this.mines,
             icon: "smiling",
             seconds: 0,
-            board: this.createBoard(this.boardSize, this.minePositions)
+            board: this.createBoard(this.boardSize, this.minePositions),
+            playing: false
         };
     },
     methods: {
@@ -31,7 +32,7 @@ export default {
 
             // game ends when clicking on a mine
             if(this.board[x][y].isMine)
-                return; // TODO
+                this.$emit("game-over", false, this.seconds);
 
             // open more tiles after cliking on one not surrounded by mines
             if(this.board[x][y].value === 0)

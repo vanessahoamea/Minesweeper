@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@300;400&display=swap");
 
+:root {
+    --board-color: #f0e8f5;
+    --board-accent: #881be3;
+    --empty-color: #d0a3f1;
+    --number-color: #881be3;
+    --mine-color: #f349c4;
+    --mine-background: #f6b1e3;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,4 +19,8 @@ body {
     padding: 10px;
     font-family: "Karla", sans-serif, Helvetica, sans-serif;
     background-color: #faf0fc;
+}
+
+button {
+    font-family: "Karla", sans-serif, Helvetica, sans-serif;
 }

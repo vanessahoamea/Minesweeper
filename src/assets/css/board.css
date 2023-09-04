@@ -1,12 +1,3 @@
-:root {
-    --board-color: #f0e8f5;
-    --board-accent: #881be3;
-    --empty-color: #d0a3f1;
-    --number-color: #881be3;
-    --mine-color: #f349c4;
-    --mine-background: #f6b1e3;
-}
-
 .board {
     background-color: var(--board-color);
     border: 3px solid var(--board-accent);
@@ -74,4 +65,8 @@
 
 .board .flagged {
     color: var(--mine-color);
+}
+
+.board.game-over {
+    pointer-events: none;
 }

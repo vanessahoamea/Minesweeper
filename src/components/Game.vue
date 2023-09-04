@@ -1,20 +1,35 @@
 <template>
     <div class="game">
+        <button class="start-button" @click="restartGame()">new game</button>
         <Board
+            :key="restart"
             :boardSize="boardSize"
             :mines="mines"
             :minePositions="placeMines()"
             :createBoard="createBoard"
+            :gameOver="gameOver"
+            @game-over="handleGameOver"
         />
     </div>
+
+    <Modal v-if="showModal" :modalData="modalData" @close="closeModal" />
 </template>
 
 <script>
 import Board from "./Board.vue";
+import Modal from "./Modal.vue";
 
 export default {
     props: ["boardSize", "mines"],
-    components: { Board },
+    components: { Board, Modal },
+    data() {
+        return {
+            restart: false,
+            gameOver: false,
+            showModal: false,
+            modalData: { win: false, seconds: 0 }
+        };
+    },
     methods: {
         placeMines() {
             const positions = [];
@@ -77,6 +92,18 @@ export default {
                     }
 
             return board;
+        },
+        handleGameOver(win, seconds) {
+            this.gameOver = true;
+            setTimeout(() => this.showModal = true, 1000);
+            this.modalData = { win, seconds };
+        },
+        restartGame() {
+            this.gameOver = false;
+            this.restart = !this.restart;
+        },
+        closeModal() {
+            this.showModal = false;
         }
     }
 };
