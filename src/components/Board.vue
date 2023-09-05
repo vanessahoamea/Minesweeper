@@ -40,9 +40,9 @@ export default {
     watch: {
         playing() {
             const timer = setInterval(() => {
-                if(this.seconds === 998 || this.gameOver)
-                    clearInterval(timer);
                 this.seconds += 1;
+                if(this.seconds === 999 || this.gameOver)
+                    clearInterval(timer);
             }, 1000);
         }
     },
@@ -74,7 +74,10 @@ export default {
 
             // open more tiles after cliking on one not surrounded by mines
             if(this.board[x][y].value === 0)
-                return; // TODO
+            {
+                this.board[x][y].hidden = true;
+                this.floodFill(x, y);
+            }
         },
         flagTile(x, y) {
             this.playing = true;
@@ -86,6 +89,32 @@ export default {
             
             this.flags += this.board[x][y].flagged ? 1 : -1;
             this.board[x][y].flagged = !this.board[x][y].flagged;
+        },
+        floodFill(i, j) {
+            if(i < 0 || i >= this.boardSize || j < 0 || j >= this.boardSize)
+                return;
+
+            if(!this.board[i][j].hidden || this.board[i][j].flagged)
+                return;
+            else
+                this.board[i][j].hidden = false;
+
+            const adjacentTiles = [
+                { x: i-1, y: j-1 }, { x: i-1, y: j }, { x: i-1, y: j+1 }, 
+                { x: i, y: j-1 },  { x: i, y: j+1 }, 
+                { x: i+1, y: j-1 }, { x: i+1, y: j }, { x: i+1, y: j+1 }
+            ];
+            const isMine = (i, j) => {
+                return this.minePositions.some((item) => item.x == i && item.y == j);
+            };
+
+            const hasMineNeighbors = adjacentTiles.some((item) => isMine(item.x, item.y));
+            if(hasMineNeighbors)
+                return;
+
+            adjacentTiles.forEach(({ x, y }) => {
+                this.floodFill(x, y);
+            });
         }
     }
 };

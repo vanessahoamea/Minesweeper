@@ -16,8 +16,8 @@ export default {
     components: { Game },
     data() {
         return {
-            boardSize: DIFFICULTY.EASY[0],
-            mines: DIFFICULTY.EASY[1]
+            boardSize: DIFFICULTY.MEDIUM[0],
+            mines: DIFFICULTY.MEDIUM[1]
         };
     }
 };
