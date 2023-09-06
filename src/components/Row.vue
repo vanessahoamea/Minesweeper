@@ -3,7 +3,9 @@
         tile: true, 
         empty: !tile.hidden && tile.value == 0, 
         number: !tile.hidden && tile.value > 0, 
-        mine: !tile.hidden && tile.isMine 
+        mine: !tile.hidden && tile.isMine, 
+        flagged: tile.flagged,
+        'wrong-flag': gameOver && tile.flagged && !tile.isMine
     }" @click.left="handleLeftClick(tile)" @click.right="handleRightClick($event, tile)">
         <!-- opened tile -->
         <div v-if="!tile.hidden">
@@ -11,15 +13,15 @@
             <span v-if="tile.value > 0">{{ tile.value }}</span>
         </div>
         <!-- flagged tile -->
-        <div v-if="tile.hidden && tile.flagged">
-            <font-awesome-icon :icon="['fas', 'flag']" class="flagged" />
+        <div v-if="tile.flagged">
+            <font-awesome-icon :icon="['fas', 'flag']" />
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["row"],
+    props: ["row", "gameOver"],
     emits: ["selected", "flagged"],
     methods: {
         handleLeftClick(tile) {

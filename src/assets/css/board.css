@@ -67,6 +67,12 @@
     color: var(--mine-color);
 }
 
+.board .wrong-flag {
+    border: 2px solid var(--mine-color);
+    background-color: var(--mine-color);
+    color: white;
+}
+
 .board.game-over {
     pointer-events: none;
 }

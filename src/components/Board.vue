@@ -3,7 +3,7 @@
         <Header :flags="flags" :icon="icon" :seconds="seconds" />
 
         <div v-for="(row, i) in board" :key="i" class="row">
-            <Row :row="row" @selected="openTile" @flagged="flagTile" />
+            <Row :row="row" :gameOver="gameOver" @selected="openTile" @flagged="flagTile" />
         </div>
     </div>
 </template>

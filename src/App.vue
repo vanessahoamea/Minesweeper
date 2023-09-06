@@ -60,6 +60,7 @@ export default {
     background-color: var(--mine-background);
     color: white;
     font-weight: bold;
+    text-transform: uppercase;
     cursor: pointer;
 }
 
